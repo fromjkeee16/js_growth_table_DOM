@@ -13,16 +13,23 @@ const removeRowButton = document.querySelector('.remove-row');
 const addColumnButton = document.querySelector('.append-column');
 const removeColumnButton = document.querySelector('.remove-column');
 
-addRowButton.addEventListener('click', () => handleClick(addRow));
-addColumnButton.addEventListener('click', () => handleClick(addCol));
-removeRowButton.addEventListener('click', () => handleClick(removeRow));
-removeColumnButton.addEventListener('click', () => handleClick(removeCol));
-
 // no explicit tbody in index.html specified...
 const field = document.querySelector('table.field tbody');
 
-let currentNumRows = field.rows.length || 0;
-let currentNumCols = field.rows[0]?.cells.length || 0;
+let currentNumRows = 0;
+let currentNumCols = 0;
+
+if (field) {
+  currentNumRows = field.rows.length;
+  currentNumCols = field.rows[0]?.cells?.length;
+}
+
+function addButtonEventListeners() {
+  addRowButton.addEventListener('click', () => handleClick(addRow));
+  addColumnButton.addEventListener('click', () => handleClick(addCol));
+  removeRowButton.addEventListener('click', () => handleClick(removeRow));
+  removeColumnButton.addEventListener('click', () => handleClick(removeCol));
+}
 
 function handleClick(callback) {
   callback();
@@ -63,7 +70,7 @@ function addCol() {
     return;
   }
 
-  const cell = field.rows[currentNumRows - 1].cells[currentNumCols - 1];
+  const cell = field.rows[0].cells[0];
 
   [...field.rows].forEach((row) => {
     const newCell = cell.cloneNode(true);
