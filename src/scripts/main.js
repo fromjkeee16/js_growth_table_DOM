@@ -22,6 +22,7 @@ let currentNumCols = 0;
 if (field) {
   currentNumRows = field.rows.length;
   currentNumCols = field.rows[0]?.cells?.length;
+  addButtonEventListeners();
 }
 
 function addButtonEventListeners() {
