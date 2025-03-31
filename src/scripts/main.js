@@ -48,6 +48,10 @@ function addRow() {
 }
 
 function removeRow() {
+  if (currentNumRows <= MIN_ROWS) {
+    return;
+  }
+
   const lastRow = field.rows[currentNumRows - 1];
 
   lastRow.remove();
@@ -70,6 +74,10 @@ function addCol() {
 }
 
 function removeCol() {
+  if (currentNumCols <= MIN_COLS) {
+    return;
+  }
+
   const lastColCells = [...field.rows].map(
     (row) => row.cells[currentNumCols - 1],
   );
